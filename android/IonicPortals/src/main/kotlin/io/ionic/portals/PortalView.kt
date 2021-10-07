@@ -28,9 +28,14 @@ class PortalView : FrameLayout {
     var tag: String? = null
 
     constructor(context: Context) : super(context)
+    constructor(context: Context, portalId: String) : super(context) {
+        this.portalId = portalId
+        id = View.generateViewId()
+        loadPortal(context)
+    }
     constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
         readAttributes(context, attrs)
-        loadPortal(context, attrs)
+        loadPortal(context)
     }
 
     constructor(context: Context, attrs: AttributeSet, defStyleAttr: Int) : super(
@@ -39,7 +44,7 @@ class PortalView : FrameLayout {
         defStyleAttr
     ) {
         readAttributes(context, attrs)
-        loadPortal(context, attrs)
+        loadPortal(context)
     }
 
     fun getPortalFragment(): PortalFragment? {
@@ -61,7 +66,7 @@ class PortalView : FrameLayout {
     }
 
     @Throws(Exception::class)
-    private fun loadPortal(context: Context, attrs: AttributeSet) {
+    private fun loadPortal(context: Context) {
         val id = id
 
         if (PortalManager.size() == 0) {
@@ -94,7 +99,7 @@ class PortalView : FrameLayout {
                 ) as PortalFragment
 
                 portalFragment?.portal = portal
-                portalFragment?.onInflate(context, attrs, null)
+                //portalFragment?.onInflate(context, attrs, null)
                 val handler = Handler()
                 val runnable = Runnable {
                     fmTransaction
