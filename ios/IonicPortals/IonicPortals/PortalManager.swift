@@ -6,7 +6,7 @@ enum PortalError: Error {
     case alreadyExists(String)
 }
 
-public class PortalManager {
+public class PortalManager: NSObject {
     
     // MARK: - Static Properties
 
